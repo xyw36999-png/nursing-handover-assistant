@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>护理交班助手</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>护理交班助手</h1>
+      <p class="subtitle">录入患者信息，或粘贴零散护理记录，一键整理为规范交班文本。</p>
+    </header>
+
+    <section class="panel" aria-label="护理交班信息录入">
+      <div class="summary-box">
+        <div class="summary-title">
+          <h2>AI总结</h2>
+          <button class="accent" type="button" onclick="summarizeNursingInfo()">AI总结并生成</button>
+        </div>
+        <label for="rawNursingInfo">杂乱护理信息</label>
+        <textarea id="rawNursingInfo" placeholder="例如：患者夜间睡眠一般，持续低流量吸氧，血氧92%-95%，痰液较多，偶有咳嗽。"></textarea>
+        <p class="hint">本功能在本地自动整理，不上传数据。请结合实际病情核对后使用。</p>
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="bedNumber">床号</label>
+          <input id="bedNumber" type="text" placeholder="例如：12床" />
+        </div>
+
+        <div class="field">
+          <label for="patientName">患者姓名</label>
+          <input id="patientName" type="text" placeholder="请输入患者姓名" />
+        </div>
+
+        <div class="field full">
+          <label for="diagnosis">诊断</label>
+          <textarea id="diagnosis" placeholder="请输入主要诊断"></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="vitalSigns">生命体征</label>
+          <textarea id="vitalSigns" placeholder="例如：T 36.5℃，P 78次/分，R 18次/分，BP 120/80mmHg"></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="treatment">治疗情况</label>
+          <textarea id="treatment" placeholder="请输入当前治疗、用药、护理措施等"></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="observation">特殊观察事项</label>
+          <textarea id="observation" placeholder="请输入需重点观察、提醒或交接的事项"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" type="button" onclick="generateHandover()">生成交班记录</button>
+        <button class="secondary" type="button" onclick="clearForm()">清空内容</button>
+      </div>
+
+      <div class="output-section">
+        <div class="output-header">
+          <h2>交班记录</h2>
+          <button class="secondary" type="button" onclick="copyHandover()">复制记录</button>
+        </div>
+        <textarea id="handoverOutput" readonly placeholder="生成后的交班记录会显示在这里"></textarea>
+        <p class="hint" id="statusText">请根据实际病情核对后再用于护理文书。</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
